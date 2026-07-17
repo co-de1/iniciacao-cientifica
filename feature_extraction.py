@@ -1,3 +1,4 @@
+import os
 import wfdb
 import numpy as np
 import pandas as pd
@@ -7,253 +8,305 @@ import neurokit2 as nk
 from scipy.signal import butter, filtfilt
 from sklearn.preprocessing import StandardScaler
 from sklearn.feature_selection import SelectKBest, f_classif
-from sklearn.metrics import (
-    classification_report,
-    confusion_matrix,
-    roc_curve,
-    roc_auc_score
-)
-from sklearn.svm import SVC
-
 from imblearn.over_sampling import SMOTE
 
-from main import df_small
+# 1. CARREGAR DATASET
 
-# 1. GARANTIR DADOS VÁLIDOS
+DATASET_PATH = "dataset_ecg_basico.csv"
 
-df_small = df_small.dropna(subset=['label'])
+if not os.path.exists(DATASET_PATH):
+    raise FileNotFoundError(f"Arquivo não encontrado: {DATASET_PATH}")
+
+df_small = pd.read_csv(DATASET_PATH)
+
+required_columns = {"label", "strat_fold", "filename_hr"}
+missing_columns = required_columns - set(df_small.columns)
+
+if missing_columns:
+    raise ValueError(f"Colunas ausentes: {missing_columns}")
+
+df_small = df_small.dropna(
+    subset=["label", "strat_fold", "filename_hr"]
+).copy()
+
+df_small["label"] = df_small["label"].astype(int)
+df_small["strat_fold"] = df_small["strat_fold"].astype(int)
 
 print("Quantidade de ECGs:", len(df_small))
 
 # 2. FILTRO PASSA-BANDA
 
-def bandpass_filter(signal, low=0.5, high=40, fs=100, order=4):
+def bandpass_filter(signal, fs, low=0.5, high=40.0, order=4):
+    signal = np.asarray(signal, dtype=float)
 
-    nyquist = 0.5 * fs
+    nyquist = fs / 2
+    low_norm = low / nyquist
+    high_norm = min(high / nyquist, 0.99)
 
-    low = low / nyquist
-    high = high / nyquist
+    if not 0 < low_norm < high_norm < 1:
+        raise ValueError("Frequências inválidas para o filtro.")
 
-    b, a = butter(order, [low, high], btype='band')
+    b, a = butter(
+        order,
+        [low_norm, high_norm],
+        btype="band"
+    )
+
+    if len(signal) <= 3 * max(len(a), len(b)):
+        raise ValueError("Sinal muito curto para o filtro.")
 
     return filtfilt(b, a, signal)
 
-# 3. EXTRAÇÃO DE FEATURES
+# 3. EXTRAIR FEATURES
 
-def extract_features(signal, fs=100):
+def extract_features(signal, fs):
+    signal = np.asarray(signal, dtype=float)
 
-    features = {}
+    features = {
+        "mean": np.mean(signal),
+        "std": np.std(signal),
+        "min": np.min(signal),
+        "max": np.max(signal),
+        "median": np.median(signal),
+        "var": np.var(signal),
+        "ptp": np.ptp(signal),
+        "energy": np.sum(signal ** 2)
+    }
 
-    # NORMALIZAÇÃO
+    std = np.std(signal)
 
-    signal = (signal - np.mean(signal)) / np.std(signal)
+    if std > 0 and np.isfinite(std):
+        normalized_signal = (
+            signal - np.mean(signal)
+        ) / std
+    else:
+        normalized_signal = signal - np.mean(signal)
 
-    # FEATURES ESTATÍSTICAS
-
-    features['mean'] = np.mean(signal)
-    features['std'] = np.std(signal)
-    features['min'] = np.min(signal)
-    features['max'] = np.max(signal)
-    features['median'] = np.median(signal)
-    features['var'] = np.var(signal)
-    features['ptp'] = np.ptp(signal)
-    features['energy'] = np.sum(signal ** 2)
-
-    # ZERO CROSSINGS
-
-    features['zero_crossings'] = np.sum(
-        np.diff(np.sign(signal)) != 0
+    # Zero crossings
+    features["zero_crossings"] = np.sum(
+        np.diff(np.sign(normalized_signal)) != 0
     )
+
     # FFT
+    fft_abs = np.abs(np.fft.rfft(normalized_signal))
+    frequencies = np.fft.rfftfreq(
+        len(normalized_signal),
+        d=1 / fs
+    )
 
-    fft = np.fft.rfft(signal)
+    features["fft_mean"] = np.mean(fft_abs)
+    features["fft_std"] = np.std(fft_abs)
+    features["fft_max"] = np.max(fft_abs)
 
-    fft_abs = np.abs(fft)
+    if len(fft_abs) > 1:
+        fft_abs[0] = 0
+        features["dominant_freq"] = frequencies[
+            np.argmax(fft_abs)
+        ]
+    else:
+        features["dominant_freq"] = 0.0
 
-    freqs = np.fft.rfftfreq(len(signal), d=1/fs)
-
-    features['fft_mean'] = np.mean(fft_abs)
-    features['fft_std'] = np.std(fft_abs)
-    features['fft_max'] = np.max(fft_abs)
-
-    dominant_freq = freqs[np.argmax(fft_abs)]
-
-    features['dominant_freq'] = dominant_freq
-
-    # DETECÇÃO DE R-PEAKS
-
+    # R-peaks
     try:
-
-        _, rpeaks = nk.ecg_peaks(
+        clean_signal = nk.ecg_clean(
             signal,
             sampling_rate=fs
         )
 
-        peaks = rpeaks["ECG_R_Peaks"]
-
-    except:
-
-        peaks = []
-
-    features['num_peaks'] = len(peaks)
-
-    # HRV FEATURES
-
-    if len(peaks) > 2:
-
-        rr = np.diff(peaks)
-
-        features['rr_mean'] = np.mean(rr)
-        features['rr_std'] = np.std(rr)
-
-        # RMSSD
-        diff_rr = np.diff(rr)
-
-        features['rmssd'] = np.sqrt(
-            np.mean(diff_rr ** 2)
+        _, info = nk.ecg_peaks(
+            clean_signal,
+            sampling_rate=fs
         )
 
-        # SDNN
-        features['sdnn'] = np.std(rr)
+        peaks = np.asarray(
+            info["ECG_R_Peaks"],
+            dtype=int
+        )
 
-        # pNN50
-        nn50 = np.sum(np.abs(diff_rr) > 50)
+    except Exception:
+        peaks = np.array([], dtype=int)
 
-        features['pnn50'] = nn50 / len(diff_rr)
+    features["num_peaks"] = len(peaks)
+
+    # Intervalos RR
+    rr_ms = np.array([])
+
+    if len(peaks) > 2:
+        rr_ms = np.diff(peaks) / fs * 1000
+
+        rr_ms = rr_ms[
+            np.isfinite(rr_ms)
+            & (rr_ms >= 300)
+            & (rr_ms <= 2000)
+        ]
+
+    if len(rr_ms) > 1:
+        diff_rr = np.diff(rr_ms)
+
+        features["rr_mean_ms"] = np.mean(rr_ms)
+        features["rr_std_ms"] = np.std(rr_ms, ddof=1)
+        features["rmssd_ms"] = np.sqrt(
+            np.mean(diff_rr ** 2)
+        )
+        features["sdnn_ms"] = np.std(rr_ms, ddof=1)
+        features["pnn50"] = np.mean(
+            np.abs(diff_rr) > 50
+        )
 
     else:
+        features.update({
+            "rr_mean_ms": 0.0,
+            "rr_std_ms": 0.0,
+            "rmssd_ms": 0.0,
+            "sdnn_ms": 0.0,
+            "pnn50": 0.0
+        })
 
-        features['rr_mean'] = 0
-        features['rr_std'] = 0
-        features['rmssd'] = 0
-        features['sdnn'] = 0
-        features['pnn50'] = 0
-
-    # CATCH22
-
+    # Catch22
     try:
+        catch22 = pycatch22.catch22_all(
+            normalized_signal
+        )
 
-        catch22 = pycatch22.catch22_all(signal)
+        features.update(
+            dict(zip(
+                catch22["names"],
+                catch22["values"]
+            ))
+        )
 
-        for name, value in zip(
-            catch22["names"],
-            catch22["values"]
-        ):
-
-            features[name] = value
-
-    except Exception as e:
-
-        print("Erro catch22:", e)
+    except Exception:
+        pass
 
     return features
 
-
 # 4. PROCESSAR ECGs
 
-features_list = []
+def process_ecgs(dataframe, lead_index=1):
+    features_list = []
+    total = len(dataframe)
 
-for i, row in df_small.iterrows():
+    for count, (_, row) in enumerate(
+        dataframe.iterrows(),
+        start=1
+    ):
+        try:
+            record = wfdb.rdrecord(row["filename_hr"])
 
-    try:
+            if record.p_signal is None:
+                raise ValueError("Registro sem sinal.")
 
-        path = row['filename_hr']
+            number_of_leads = record.p_signal.shape[1]
 
-        record = wfdb.rdrecord(path)
+            if not 0 <= lead_index < number_of_leads:
+                raise ValueError("Índice de derivação inválido.")
 
-        # USAR MÉDIA DAS LEADS
+            signal = record.p_signal[:, lead_index]
 
-        signal = np.mean(record.p_signal, axis=1)
+            if not np.all(np.isfinite(signal)):
+                signal = (
+                    pd.Series(signal)
+                    .replace([np.inf, -np.inf], np.nan)
+                    .interpolate(limit_direction="both")
+                    .to_numpy()
+                )
 
-        # FILTRAR ECG
+            if not np.all(np.isfinite(signal)):
+                raise ValueError("Sinal contém valores inválidos.")
 
-        signal = bandpass_filter(signal)
+            fs = float(record.fs)
 
-        # EXTRAIR FEATURES
+            signal = bandpass_filter(
+                signal,
+                fs=fs
+            )
 
-        feats = extract_features(signal)
+            features = extract_features(
+                signal,
+                fs=fs
+            )
 
-        feats['label'] = row['label']
-        feats['strat_fold'] = row['strat_fold']
+            features["label"] = int(row["label"])
+            features["strat_fold"] = int(
+                row["strat_fold"]
+            )
 
-        features_list.append(feats)
+            features_list.append(features)
 
-        if i % 50 == 0:
-            print(f"ECGs processados: {i}")
+            if count % 50 == 0 or count == total:
+                print(f"ECGs processados: {count}/{total}")
 
-    except Exception as e:
+        except Exception as error:
+            print(f"Erro no ECG {count}: {error}")
 
-        print(f"Erro no ECG {i}: {e}")
+    return pd.DataFrame(features_list)
 
-        continue
+# 5. EXTRAIR E SALVAR FEATURES
 
-# 5. DATAFRAME FINAL
-
-df_features = pd.DataFrame(features_list)
-
-if df_features.empty:
-    raise ValueError(
-        "Nenhum ECG foi processado"
-    )
-
-print("\nShape final:", df_features.shape)
-
-print("\nDistribuição das classes:")
-print(df_features['label'].value_counts())
-
-
-# 6. PREPARAR DADOS
-
-X = df_features.drop(
-    columns=['label', 'strat_fold']
+df_features = process_ecgs(
+    df_small,
+    lead_index=1
 )
 
-y = df_features['label']
+if df_features.empty:
+    raise ValueError("Nenhum ECG foi processado.")
 
-# 7. SPLIT TREINO / TESTE
+df_features.to_csv(
+    "dataset_features_ecg.csv",
+    index=False
+)
 
-print("\nDistribuição dos folds:")
-print(df_features['strat_fold'].value_counts())
+print("\nShape:", df_features.shape)
+print("\nClasses:")
+print(df_features["label"].value_counts().sort_index())
 
-test_fold = df_features['strat_fold'].max()
+# 6. DIVIDIR POR FOLDS
 
-print(f"\nFold de teste: {test_fold}")
+X = df_features.drop(
+    columns=["label", "strat_fold"]
+).replace([np.inf, -np.inf], np.nan)
 
-train_idx = df_features['strat_fold'] != test_fold
-test_idx = df_features['strat_fold'] == test_fold
+y = df_features["label"]
+folds = df_features["strat_fold"]
 
-X_train = X[train_idx]
-X_test = X[test_idx]
+train_mask = folds.between(1, 8)
+val_mask = folds == 9
+test_mask = folds == 10
 
-y_train = y[train_idx]
-y_test = y[test_idx]
+X_train = X.loc[train_mask].copy()
+X_val = X.loc[val_mask].copy()
+X_test = X.loc[test_mask].copy()
 
+y_train = y.loc[train_mask].copy()
+y_val = y.loc[val_mask].copy()
+y_test = y.loc[test_mask].copy()
 
-# 8. NORMALIZAÇÃO SEM DATA LEAKAGE
+if X_train.empty or X_val.empty or X_test.empty:
+    raise ValueError("Treino, validação ou teste está vazio.")
+
+# 7. TRATAR NaN
+
+train_medians = X_train.median()
+
+X_train = X_train.fillna(train_medians).fillna(0)
+X_val = X_val.fillna(train_medians).fillna(0)
+X_test = X_test.fillna(train_medians).fillna(0)
+
+# 8. PADRONIZAR
 
 scaler = StandardScaler()
 
 X_train = scaler.fit_transform(X_train)
+X_val = scaler.transform(X_val)
 X_test = scaler.transform(X_test)
 
+# 9. SELECIONAR FEATURES
 
-# 9. SMOTE (BALANCEAMENTO)
-
-smote = SMOTE(random_state=42)
-
-X_train, y_train = smote.fit_resample(
-    X_train,
-    y_train
-)
-
-print("\nApós SMOTE:")
-print(pd.Series(y_train).value_counts())
-
-# 10. FEATURE SELECTION
+number_of_features = min(25, X.shape[1])
 
 selector = SelectKBest(
     score_func=f_classif,
-    k=25
+    k=number_of_features
 )
 
 X_train = selector.fit_transform(
@@ -261,73 +314,37 @@ X_train = selector.fit_transform(
     y_train
 )
 
+X_val = selector.transform(X_val)
 X_test = selector.transform(X_test)
-
-print("\nNúmero final de features:")
-print(X_train.shape[1])
-
-# 11. MODELO SVM
-
-model = SVC(
-    kernel='rbf',
-    class_weight='balanced',
-    probability=True,
-    random_state=42
-)
-
-model.fit(X_train, y_train)
-
-# 12. PREDIÇÃO
-
-y_prob = model.predict_proba(X_test)[:, 1]
-
-# 13. THRESHOLD ÓTIMO
-
-fpr, tpr, thresholds = roc_curve(
-    y_test,
-    y_prob
-)
-
-optimal_idx = np.argmax(tpr - fpr)
-
-optimal_threshold = thresholds[optimal_idx]
-
-print("\nThreshold ótimo:")
-print(optimal_threshold)
-
-y_pred = (
-    y_prob >= optimal_threshold
-).astype(int)
-
-# 14. AVALIAÇÃO
-
-print("\nAUC:")
-print(roc_auc_score(y_test, y_prob))
-
-print("\nMatriz de confusão:")
-print(confusion_matrix(y_test, y_pred))
-
-print("\nRelatório:")
-print(classification_report(y_test, y_pred))
-
-# 15. IMPORTÂNCIA DAS FEATURES
 
 selected_features = X.columns[
     selector.get_support()
-]
+].tolist()
 
 print("\nFeatures selecionadas:")
+print(selected_features)
 
-for feat in selected_features:
-    print(feat)
+# 10. SMOTE SOMENTE NO TREINO
 
-# 16. SALVAR DATASET
+minority_count = pd.Series(y_train).value_counts().min()
 
-df_features.to_csv(
-    "dataset_features_ecg.csv",
-    index=False
+if minority_count < 2:
+    raise ValueError(
+        "A classe minoritária precisa ter pelo menos 2 amostras para usar SMOTE."
+    )
+
+smote = SMOTE(
+    random_state=42,
+    k_neighbors=min(5, minority_count - 1)
 )
 
-print("\nDataset salvo!")
+X_train, y_train = smote.fit_resample(
+    X_train,
+    y_train
+)
 
-print(df_features.head())
+print("\nDistribuição antes do SMOTE:")
+print(pd.Series(y.loc[train_mask]).value_counts().sort_index())
+
+print("\nDistribuição após SMOTE:")
+print(pd.Series(y_train).value_counts().sort_index())

@@ -4,7 +4,7 @@ scp_codes,filename_hr,filename_lr,strat_fold,labels,label
 "{'NST_': 100.0, 'DIG': 100.0, 'SR': 0.0}",records500/00000/00026_hr,records100/00000/00026_lr,9,['STTC'],1
 "{'NST_': 100.0, 'DIG': 100.0, 'SR': 0.0}",records500/00000/00028_hr,records100/00000/00028_lr,9,['STTC'],1
 "{'LVH': 100.0, 'SR': 0.0}",records500/00000/00030_hr,records100/00000/00030_lr,9,['HYP'],0
-"{'IMI': 15.0, 'LNGQT': 100.0, 'NST_': 100.0, 'DIG': 100.0, 'ABQRS': 0.0, 'SR': 0.0}",records500/00000/00039_hr,records100/00000/00039_lr,9,"['MI', 'STTC']",1
+"{'IMI': 15.0, 'LNGQT': 100.0, 'NST_': 100.0, 'DIG': 100.0, 'ABQRS': 0.0, 'SR': 0.0}",records500/00000/00039_hr,records100/00000/00039_lr,9,"['STTC', 'MI']",1
 "{'LAFB': 100.0, 'SR': 0.0}",records500/00000/00041_hr,records100/00000/00041_lr,9,['CD'],0
 "{'NORM': 100.0, 'SR': 0.0}",records500/00000/00047_hr,records100/00000/00047_lr,9,['NORM'],0
 "{'NDT': 100.0, 'SR': 0.0}",records500/00000/00048_hr,records100/00000/00048_lr,9,['STTC'],1
@@ -18,7 +18,7 @@ scp_codes,filename_hr,filename_lr,strat_fold,labels,label
 "{'NDT': 100.0, 'SR': 0.0}",records500/00000/00127_hr,records100/00000/00127_lr,9,['STTC'],1
 "{'NDT': 100.0, 'SR': 0.0}",records500/00000/00134_hr,records100/00000/00134_lr,9,['STTC'],1
 {'NORM': 100.0},records500/00000/00151_hr,records100/00000/00151_lr,9,['NORM'],0
-"{'LMI': 50.0, 'ISCIL': 100.0, 'AFIB': 0.0}",records500/00000/00152_hr,records100/00000/00152_lr,9,"['MI', 'STTC']",1
+"{'LMI': 50.0, 'ISCIL': 100.0, 'AFIB': 0.0}",records500/00000/00152_hr,records100/00000/00152_lr,9,"['STTC', 'MI']",1
 "{'IMI': 15.0, 'ABQRS': 0.0, 'SR': 0.0}",records500/00000/00153_hr,records100/00000/00153_lr,9,['MI'],1
 "{'ILMI': 35.0, 'ABQRS': 0.0, 'SR': 0.0}",records500/00000/00155_hr,records100/00000/00155_lr,9,['MI'],1
 "{'NORM': 100.0, 'SR': 0.0}",records500/00000/00165_hr,records100/00000/00165_lr,9,['NORM'],0
@@ -37,13 +37,13 @@ scp_codes,filename_hr,filename_lr,strat_fold,labels,label
 "{'NORM': 100.0, 'SR': 0.0}",records500/00000/00216_hr,records100/00000/00216_lr,9,['NORM'],0
 "{'NDT': 100.0, 'SR': 0.0}",records500/00000/00217_hr,records100/00000/00217_lr,9,['STTC'],1
 "{'NORM': 50.0, 'PVC': 100.0, 'SR': 0.0}",records500/00000/00219_hr,records100/00000/00219_lr,9,['NORM'],0
-"{'ASMI': 50.0, 'LVH': 100.0, 'ISC_': 100.0, 'SR': 0.0}",records500/00000/00223_hr,records100/00000/00223_lr,9,"['MI', 'STTC', 'HYP']",1
+"{'ASMI': 50.0, 'LVH': 100.0, 'ISC_': 100.0, 'SR': 0.0}",records500/00000/00223_hr,records100/00000/00223_lr,9,"['STTC', 'HYP', 'MI']",1
 "{'NORM': 80.0, 'SARRH': 0.0}",records500/00000/00228_hr,records100/00000/00228_lr,9,['NORM'],0
 "{'NORM': 100.0, 'SR': 0.0}",records500/00000/00233_hr,records100/00000/00233_lr,9,['NORM'],0
-"{'ASMI': 100.0, 'IMI': 15.0, 'ANEUR': 100.0, '1AVB': 100.0, 'SR': 0.0}",records500/00000/00234_hr,records100/00000/00234_lr,9,"['MI', 'STTC']",1
+"{'ASMI': 100.0, 'IMI': 15.0, 'ANEUR': 100.0, '1AVB': 100.0, 'SR': 0.0}",records500/00000/00234_hr,records100/00000/00234_lr,9,"['STTC', 'MI']",1
 "{'LAFB': 100.0, 'SR': 0.0}",records500/00000/00238_hr,records100/00000/00238_lr,9,['CD'],0
 "{'NORM': 100.0, 'SR': 0.0}",records500/00000/00262_hr,records100/00000/00262_lr,9,['NORM'],0
-"{'ALMI': 100.0, 'IMI': 80.0, 'LAFB': 100.0, 'PVC': 100.0, 'ANEUR': 50.0, 'QWAVE': 0.0, 'INVT': 0.0, 'SR': 0.0}",records500/00000/00266_hr,records100/00000/00266_lr,9,"['CD', 'MI', 'STTC']",1
+"{'ALMI': 100.0, 'IMI': 80.0, 'LAFB': 100.0, 'PVC': 100.0, 'ANEUR': 50.0, 'QWAVE': 0.0, 'INVT': 0.0, 'SR': 0.0}",records500/00000/00266_hr,records100/00000/00266_lr,9,"['STTC', 'CD', 'MI']",1
 "{'ASMI': 100.0, 'ALMI': 100.0, 'IMI': 100.0, 'LAFB': 100.0}",records500/00000/00281_hr,records100/00000/00281_lr,9,"['CD', 'MI']",1
 "{'ASMI': 50.0, 'CLBBB': 100.0, 'PVC': 100.0, 'SR': 0.0}",records500/00000/00287_hr,records100/00000/00287_lr,9,"['CD', 'MI']",1
 "{'NORM': 100.0, 'SR': 0.0}",records500/00000/00293_hr,records100/00000/00293_lr,9,['NORM'],0
@@ -56,14 +56,14 @@ scp_codes,filename_hr,filename_lr,strat_fold,labels,label
 "{'NORM': 80.0, 'SR': 0.0}",records500/00000/00360_hr,records100/00000/00360_lr,9,['NORM'],0
 "{'NORM': 100.0, 'SR': 0.0}",records500/00000/00365_hr,records100/00000/00365_lr,9,['NORM'],0
 "{'NORM': 100.0, 'SR': 0.0}",records500/00000/00368_hr,records100/00000/00368_lr,9,['NORM'],0
-"{'IMI': 15.0, 'LVH': 100.0, 'ISC_': 100.0}",records500/00000/00383_hr,records100/00000/00383_lr,9,"['MI', 'STTC', 'HYP']",1
+"{'IMI': 15.0, 'LVH': 100.0, 'ISC_': 100.0}",records500/00000/00383_hr,records100/00000/00383_lr,9,"['STTC', 'HYP', 'MI']",1
 "{'LVH': 100.0, 'ISC_': 100.0}",records500/00000/00386_hr,records100/00000/00386_lr,9,"['STTC', 'HYP']",1
 "{'NORM': 100.0, 'SR': 0.0}",records500/00000/00387_hr,records100/00000/00387_lr,9,['NORM'],0
 "{'NORM': 100.0, 'SR': 0.0}",records500/00000/00398_hr,records100/00000/00398_lr,9,['NORM'],0
 "{'NORM': 100.0, 'SR': 0.0}",records500/00000/00406_hr,records100/00000/00406_lr,9,['NORM'],0
-"{'INJAS': 100.0, 'INJAL': 100.0, 'LVH': 50.0, 'VCLVH': 0.0, 'STD_': 0.0, 'SR': 0.0}",records500/00000/00414_hr,records100/00000/00414_lr,9,"['MI', 'HYP']",1
+"{'INJAS': 100.0, 'INJAL': 100.0, 'LVH': 50.0, 'VCLVH': 0.0, 'STD_': 0.0, 'SR': 0.0}",records500/00000/00414_hr,records100/00000/00414_lr,9,"['HYP', 'MI']",1
 "{'NORM': 100.0, 'SR': 0.0}",records500/00000/00419_hr,records100/00000/00419_lr,9,['NORM'],0
-"{'IPMI': 100.0, 'LVH': 100.0, 'ISC_': 100.0, 'PVC': 100.0, 'QWAVE': 0.0, 'LOWT': 0.0, 'STD_': 0.0, 'SR': 0.0}",records500/00000/00425_hr,records100/00000/00425_lr,9,"['MI', 'STTC', 'HYP']",1
+"{'IPMI': 100.0, 'LVH': 100.0, 'ISC_': 100.0, 'PVC': 100.0, 'QWAVE': 0.0, 'LOWT': 0.0, 'STD_': 0.0, 'SR': 0.0}",records500/00000/00425_hr,records100/00000/00425_lr,9,"['STTC', 'HYP', 'MI']",1
 "{'NORM': 100.0, 'SR': 0.0}",records500/00000/00437_hr,records100/00000/00437_lr,9,['NORM'],0
 "{'NORM': 100.0, 'SR': 0.0}",records500/00000/00441_hr,records100/00000/00441_lr,9,['NORM'],0
 "{'NORM': 100.0, 'SR': 0.0}",records500/00000/00445_hr,records100/00000/00445_lr,9,['NORM'],0
@@ -73,11 +73,11 @@ scp_codes,filename_hr,filename_lr,strat_fold,labels,label
 "{'LAFB': 100.0, 'SR': 0.0}",records500/00000/00520_hr,records100/00000/00520_lr,9,['CD'],0
 "{'LVH': 100.0, 'ISC_': 100.0, '1AVB': 100.0, 'LAO/LAE': 100.0}",records500/00000/00524_hr,records100/00000/00524_lr,9,"['STTC', 'HYP']",1
 "{'NST_': 100.0, 'SR': 0.0}",records500/00000/00529_hr,records100/00000/00529_lr,9,['STTC'],1
-"{'ASMI': 100.0, 'LVH': 100.0, 'ISC_': 100.0, 'SR': 0.0}",records500/00000/00537_hr,records100/00000/00537_lr,9,"['MI', 'STTC', 'HYP']",1
-"{'IMI': 100.0, 'LVH': 100.0, 'ISC_': 100.0}",records500/00000/00544_hr,records100/00000/00544_lr,9,"['MI', 'STTC', 'HYP']",1
-"{'IMI': 50.0, 'LVH': 100.0, 'ISC_': 100.0, 'CLBBB': 100.0, 'SR': 0.0}",records500/00000/00545_hr,records100/00000/00545_lr,9,"['CD', 'MI', 'STTC', 'HYP']",1
+"{'ASMI': 100.0, 'LVH': 100.0, 'ISC_': 100.0, 'SR': 0.0}",records500/00000/00537_hr,records100/00000/00537_lr,9,"['STTC', 'HYP', 'MI']",1
+"{'IMI': 100.0, 'LVH': 100.0, 'ISC_': 100.0}",records500/00000/00544_hr,records100/00000/00544_lr,9,"['STTC', 'HYP', 'MI']",1
+"{'IMI': 50.0, 'LVH': 100.0, 'ISC_': 100.0, 'CLBBB': 100.0, 'SR': 0.0}",records500/00000/00545_hr,records100/00000/00545_lr,9,"['STTC', 'HYP', 'CD', 'MI']",1
 "{'NORM': 100.0, 'SR': 0.0}",records500/00000/00553_hr,records100/00000/00553_lr,9,['NORM'],0
-"{'IMI': 15.0, 'ISCAN': 100.0, 'SR': 0.0}",records500/00000/00554_hr,records100/00000/00554_lr,9,"['MI', 'STTC']",1
+"{'IMI': 15.0, 'ISCAN': 100.0, 'SR': 0.0}",records500/00000/00554_hr,records100/00000/00554_lr,9,"['STTC', 'MI']",1
 "{'IMI': 15.0, 'SR': 0.0}",records500/00000/00558_hr,records100/00000/00558_lr,9,['MI'],1
 "{'IMI': 50.0, 'ASMI': 100.0, 'IVCD': 100.0, '1AVB': 100.0, 'SR': 0.0}",records500/00000/00563_hr,records100/00000/00563_lr,9,"['CD', 'MI']",1
 "{'NORM': 80.0, 'VCLVH': 0.0, 'SR': 0.0}",records500/00000/00574_hr,records100/00000/00574_lr,9,['NORM'],0
@@ -85,14 +85,14 @@ scp_codes,filename_hr,filename_lr,strat_fold,labels,label
 "{'IMI': 80.0, 'NT_': 0.0, 'QWAVE': 0.0, 'SR': 0.0}",records500/00000/00601_hr,records100/00000/00601_lr,9,['MI'],1
 "{'NDT': 100.0, 'LOWT': 0.0, 'SBRAD': 0.0}",records500/00000/00612_hr,records100/00000/00612_lr,9,['STTC'],1
 "{'NORM': 100.0, 'SR': 0.0}",records500/00000/00615_hr,records100/00000/00615_lr,9,['NORM'],0
-"{'IMI': 100.0, 'NDT': 100.0, 'QWAVE': 0.0, 'SR': 0.0}",records500/00000/00627_hr,records100/00000/00627_lr,9,"['MI', 'STTC']",1
+"{'IMI': 100.0, 'NDT': 100.0, 'QWAVE': 0.0, 'SR': 0.0}",records500/00000/00627_hr,records100/00000/00627_lr,9,"['STTC', 'MI']",1
 "{'LAFB': 100.0, 'SR': 0.0}",records500/00000/00633_hr,records100/00000/00633_lr,9,['CD'],0
 "{'NORM': 100.0, 'SR': 0.0}",records500/00000/00662_hr,records100/00000/00662_lr,9,['NORM'],0
 "{'NORM': 100.0, 'SR': 0.0}",records500/00000/00673_hr,records100/00000/00673_lr,9,['NORM'],0
-"{'LAFB': 100.0, 'INJAS': 100.0, 'SR': 0.0}",records500/00000/00705_hr,records100/00000/00705_lr,9,"['CD', 'MI']",1
+"{'LAFB': 100.0, 'INJAS': 100.0, 'SR': 0.0}",records500/00000/00705_hr,records100/00000/00705_lr,9,"['MI', 'CD']",1
 "{'AMI': 50.0, 'NT_': 0.0, 'QWAVE': 0.0, 'SR': 0.0}",records500/00000/00716_hr,records100/00000/00716_lr,9,['MI'],1
-"{'ASMI': 50.0, 'NDT': 100.0, 'AFIB': 0.0}",records500/00000/00717_hr,records100/00000/00717_lr,9,"['MI', 'STTC']",1
-"{'ASMI': 50.0, 'LVH': 100.0, 'ISC_': 100.0, 'STD_': 0.0, 'AFIB': 0.0}",records500/00000/00722_hr,records100/00000/00722_lr,9,"['MI', 'STTC', 'HYP']",1
+"{'ASMI': 50.0, 'NDT': 100.0, 'AFIB': 0.0}",records500/00000/00717_hr,records100/00000/00717_lr,9,"['STTC', 'MI']",1
+"{'ASMI': 50.0, 'LVH': 100.0, 'ISC_': 100.0, 'STD_': 0.0, 'AFIB': 0.0}",records500/00000/00722_hr,records100/00000/00722_lr,9,"['STTC', 'HYP', 'MI']",1
 "{'ASMI': 100.0, 'IMI': 50.0, '1AVB': 100.0, 'NT_': 0.0, 'LPR': 0.0, 'SR': 0.0}",records500/00000/00728_hr,records100/00000/00728_lr,9,['MI'],1
 "{'NORM': 100.0, 'SR': 0.0}",records500/00000/00748_hr,records100/00000/00748_lr,9,['NORM'],0
 {'NORM': 100.0},records500/00000/00771_hr,records100/00000/00771_lr,9,['NORM'],0
@@ -100,16 +100,16 @@ scp_codes,filename_hr,filename_lr,strat_fold,labels,label
 "{'NORM': 100.0, 'SR': 0.0}",records500/00000/00776_hr,records100/00000/00776_lr,9,['NORM'],0
 "{'NORM': 100.0, 'SR': 0.0}",records500/00000/00787_hr,records100/00000/00787_lr,9,['NORM'],0
 "{'NORM': 100.0, 'SR': 0.0}",records500/00000/00792_hr,records100/00000/00792_lr,9,['NORM'],0
-"{'CLBBB': 100.0, 'PVC': 100.0, 'LAO/LAE': 50.0, 'SR': 0.0}",records500/00000/00796_hr,records100/00000/00796_lr,9,"['CD', 'HYP']",0
+"{'CLBBB': 100.0, 'PVC': 100.0, 'LAO/LAE': 50.0, 'SR': 0.0}",records500/00000/00796_hr,records100/00000/00796_lr,9,"['HYP', 'CD']",0
 "{'CLBBB': 100.0, 'PVC': 100.0, 'SR': 0.0}",records500/00000/00798_hr,records100/00000/00798_lr,9,['CD'],0
 "{'ASMI': 100.0, 'ALMI': 100.0, '1AVB': 100.0}",records500/00000/00800_hr,records100/00000/00800_lr,9,['MI'],1
-"{'LAFB': 100.0, 'IVCD': 100.0, 'LVH': 50.0, 'ISC_': 100.0, 'SR': 0.0}",records500/00000/00814_hr,records100/00000/00814_lr,9,"['CD', 'STTC', 'HYP']",1
+"{'LAFB': 100.0, 'IVCD': 100.0, 'LVH': 50.0, 'ISC_': 100.0, 'SR': 0.0}",records500/00000/00814_hr,records100/00000/00814_lr,9,"['STTC', 'HYP', 'CD']",1
 "{'NORM': 50.0, 'PVC': 100.0, 'SARRH': 0.0}",records500/00000/00818_hr,records100/00000/00818_lr,9,['NORM'],0
-"{'NDT': 100.0, 'IRBBB': 100.0, 'PVC': 100.0, 'STD_': 0.0, 'SBRAD': 0.0}",records500/00000/00823_hr,records100/00000/00823_lr,9,"['CD', 'STTC']",1
+"{'NDT': 100.0, 'IRBBB': 100.0, 'PVC': 100.0, 'STD_': 0.0, 'SBRAD': 0.0}",records500/00000/00823_hr,records100/00000/00823_lr,9,"['STTC', 'CD']",1
 "{'NORM': 100.0, 'SR': 0.0}",records500/00000/00839_hr,records100/00000/00839_lr,9,['NORM'],0
 "{'NORM': 100.0, 'SR': 0.0}",records500/00000/00843_hr,records100/00000/00843_lr,9,['NORM'],0
 "{'NDT': 100.0, 'STD_': 0.0, 'STACH': 0.0}",records500/00000/00849_hr,records100/00000/00849_lr,9,['STTC'],1
-"{'LVH': 15.0, 'IRBBB': 100.0, 'VCLVH': 0.0, 'SR': 0.0}",records500/00000/00856_hr,records100/00000/00856_lr,9,"['CD', 'HYP']",0
+"{'LVH': 15.0, 'IRBBB': 100.0, 'VCLVH': 0.0, 'SR': 0.0}",records500/00000/00856_hr,records100/00000/00856_lr,9,"['HYP', 'CD']",0
 "{'NORM': 100.0, 'AFIB': 0.0}",records500/00000/00866_hr,records100/00000/00866_lr,9,['NORM'],0
 "{'NORM': 100.0, 'SR': 0.0}",records500/00000/00868_hr,records100/00000/00868_lr,9,['NORM'],0
 "{'NORM': 100.0, 'SARRH': 0.0}",records500/00000/00881_hr,records100/00000/00881_lr,9,['NORM'],0
@@ -142,7 +142,7 @@ scp_codes,filename_hr,filename_lr,strat_fold,labels,label
 "{'NORM': 80.0, 'PVC': 0.0, 'SR': 0.0}",records500/01000/01152_hr,records100/01000/01152_lr,9,['NORM'],0
 {'ASMI': 15.0},records500/01000/01159_hr,records100/01000/01159_lr,9,['MI'],1
 "{'NORM': 80.0, 'PAC': 0.0, 'SR': 0.0}",records500/01000/01184_hr,records100/01000/01184_lr,9,['NORM'],0
-"{'NDT': 100.0, 'IVCD': 100.0, 'SR': 0.0}",records500/01000/01205_hr,records100/01000/01205_lr,9,"['CD', 'STTC']",1
+"{'NDT': 100.0, 'IVCD': 100.0, 'SR': 0.0}",records500/01000/01205_hr,records100/01000/01205_lr,9,"['STTC', 'CD']",1
 "{'NORM': 100.0, 'SR': 0.0}",records500/01000/01206_hr,records100/01000/01206_lr,9,['NORM'],0
 "{'NORM': 100.0, 'SR': 0.0}",records500/01000/01208_hr,records100/01000/01208_lr,9,['NORM'],0
 "{'NDT': 100.0, '2AVB': 100.0}",records500/01000/01222_hr,records100/01000/01222_lr,9,['STTC'],1
@@ -155,40 +155,40 @@ scp_codes,filename_hr,filename_lr,strat_fold,labels,label
 "{'NORM': 80.0, 'SR': 0.0}",records500/01000/01316_hr,records100/01000/01316_lr,9,['NORM'],0
 "{'NORM': 80.0, 'PVC': 0.0, 'SR': 0.0}",records500/01000/01321_hr,records100/01000/01321_lr,9,['NORM'],0
 "{'NORM': 100.0, 'SR': 0.0}",records500/01000/01364_hr,records100/01000/01364_lr,9,['NORM'],0
-"{'CLBBB': 100.0, 'LAO/LAE': 50.0, 'SR': 0.0}",records500/01000/01367_hr,records100/01000/01367_lr,9,"['CD', 'HYP']",0
+"{'CLBBB': 100.0, 'LAO/LAE': 50.0, 'SR': 0.0}",records500/01000/01367_hr,records100/01000/01367_lr,9,"['HYP', 'CD']",0
 "{'NORM': 100.0, 'SR': 0.0}",records500/01000/01379_hr,records100/01000/01379_lr,9,['NORM'],0
 "{'NORM': 100.0, 'NT_': 0.0, 'SR': 0.0}",records500/01000/01421_hr,records100/01000/01421_lr,9,['NORM'],0
-"{'ASMI': 100.0, 'ISCAL': 100.0, 'SR': 0.0}",records500/01000/01427_hr,records100/01000/01427_lr,9,"['MI', 'STTC']",1
+"{'ASMI': 100.0, 'ISCAL': 100.0, 'SR': 0.0}",records500/01000/01427_hr,records100/01000/01427_lr,9,"['STTC', 'MI']",1
 "{'ASMI': 100.0, 'ALMI': 100.0}",records500/01000/01433_hr,records100/01000/01433_lr,9,['MI'],1
-"{'ASMI': 100.0, 'LVH': 100.0, 'ISC_': 100.0, 'PVC': 100.0, 'AFIB': 0.0}",records500/01000/01439_hr,records100/01000/01439_lr,9,"['MI', 'STTC', 'HYP']",1
+"{'ASMI': 100.0, 'LVH': 100.0, 'ISC_': 100.0, 'PVC': 100.0, 'AFIB': 0.0}",records500/01000/01439_hr,records100/01000/01439_lr,9,"['STTC', 'HYP', 'MI']",1
 "{'ASMI': 100.0, 'SR': 0.0}",records500/01000/01440_hr,records100/01000/01440_lr,9,['MI'],1
 "{'ISCIL': 100.0, 'SR': 0.0}",records500/01000/01449_hr,records100/01000/01449_lr,9,['STTC'],1
 "{'LVH': 100.0, 'SR': 0.0}",records500/01000/01451_hr,records100/01000/01451_lr,9,['HYP'],0
 "{'NORM': 80.0, 'SR': 0.0}",records500/01000/01453_hr,records100/01000/01453_lr,9,['NORM'],0
 "{'NORM': 80.0, 'SR': 0.0}",records500/01000/01455_hr,records100/01000/01455_lr,9,['NORM'],0
 "{'NORM': 100.0, 'SR': 0.0}",records500/01000/01462_hr,records100/01000/01462_lr,9,['NORM'],0
-"{'ASMI': 100.0, 'LVH': 100.0, 'ISC_': 100.0, 'LAFB': 100.0, 'SR': 0.0}",records500/01000/01464_hr,records100/01000/01464_lr,9,"['CD', 'MI', 'STTC', 'HYP']",1
+"{'ASMI': 100.0, 'LVH': 100.0, 'ISC_': 100.0, 'LAFB': 100.0, 'SR': 0.0}",records500/01000/01464_hr,records100/01000/01464_lr,9,"['STTC', 'HYP', 'CD', 'MI']",1
 "{'LVH': 100.0, 'ISC_': 100.0, '1AVB': 100.0, 'LPR': 0.0, 'INVT': 0.0, 'STD_': 0.0, 'SR': 0.0}",records500/01000/01469_hr,records100/01000/01469_lr,9,"['STTC', 'HYP']",1
-"{'ASMI': 100.0, 'ILMI': 100.0, 'ANEUR': 100.0, 'QWAVE': 0.0, 'SR': 0.0}",records500/01000/01473_hr,records100/01000/01473_lr,9,"['MI', 'STTC']",1
+"{'ASMI': 100.0, 'ILMI': 100.0, 'ANEUR': 100.0, 'QWAVE': 0.0, 'SR': 0.0}",records500/01000/01473_hr,records100/01000/01473_lr,9,"['STTC', 'MI']",1
 "{'CRBBB': 100.0, 'SR': 0.0}",records500/01000/01478_hr,records100/01000/01478_lr,9,['CD'],0
 "{'LVH': 100.0, 'ISC_': 100.0, 'AFIB': 0.0}",records500/01000/01486_hr,records100/01000/01486_lr,9,"['STTC', 'HYP']",1
-"{'ASMI': 50.0, 'ISCIL': 100.0, 'QWAVE': 0.0, 'SR': 0.0}",records500/01000/01490_hr,records100/01000/01490_lr,9,"['MI', 'STTC']",1
-"{'ASMI': 100.0, 'ILMI': 100.0, 'CRBBB': 100.0, 'LAO/LAE': 100.0, 'SR': 0.0}",records500/01000/01492_hr,records100/01000/01492_lr,9,"['CD', 'MI', 'HYP']",1
+"{'ASMI': 50.0, 'ISCIL': 100.0, 'QWAVE': 0.0, 'SR': 0.0}",records500/01000/01490_hr,records100/01000/01490_lr,9,"['STTC', 'MI']",1
+"{'ASMI': 100.0, 'ILMI': 100.0, 'CRBBB': 100.0, 'LAO/LAE': 100.0, 'SR': 0.0}",records500/01000/01492_hr,records100/01000/01492_lr,9,"['CD', 'HYP', 'MI']",1
 "{'NORM': 100.0, 'SR': 0.0}",records500/01000/01497_hr,records100/01000/01497_lr,9,['NORM'],0
 "{'NST_': 100.0, 'AFIB': 0.0}",records500/01000/01502_hr,records100/01000/01502_lr,9,['STTC'],1
 "{'NORM': 100.0, 'SR': 0.0}",records500/01000/01504_hr,records100/01000/01504_lr,9,['NORM'],0
-"{'IMI': 50.0, 'NDT': 100.0, 'QWAVE': 0.0, 'STD_': 0.0, 'SR': 0.0}",records500/01000/01515_hr,records100/01000/01515_lr,9,"['MI', 'STTC']",1
+"{'IMI': 50.0, 'NDT': 100.0, 'QWAVE': 0.0, 'STD_': 0.0, 'SR': 0.0}",records500/01000/01515_hr,records100/01000/01515_lr,9,"['STTC', 'MI']",1
 "{'NORM': 100.0, 'SR': 0.0}",records500/01000/01518_hr,records100/01000/01518_lr,9,['NORM'],0
 "{'AMI': 100.0, 'ABQRS': 0.0, 'SR': 0.0}",records500/01000/01541_hr,records100/01000/01541_lr,9,['MI'],1
-"{'NST_': 100.0, 'IVCD': 100.0, 'LOWT': 0.0, 'STD_': 0.0, 'SBRAD': 0.0}",records500/01000/01542_hr,records100/01000/01542_lr,9,"['CD', 'STTC']",1
+"{'NST_': 100.0, 'IVCD': 100.0, 'LOWT': 0.0, 'STD_': 0.0, 'SBRAD': 0.0}",records500/01000/01542_hr,records100/01000/01542_lr,9,"['STTC', 'CD']",1
 "{'NORM': 100.0, 'SR': 0.0}",records500/01000/01566_hr,records100/01000/01566_lr,9,['NORM'],0
 "{'IMI': 100.0, 'SR': 0.0}",records500/01000/01577_hr,records100/01000/01577_lr,9,['MI'],1
-"{'NORM': 100.0, 'NST_': 0.0, 'SR': 0.0}",records500/01000/01595_hr,records100/01000/01595_lr,9,"['NORM', 'STTC']",1
+"{'NORM': 100.0, 'NST_': 0.0, 'SR': 0.0}",records500/01000/01595_hr,records100/01000/01595_lr,9,"['STTC', 'NORM']",1
 "{'NORM': 100.0, 'SR': 0.0}",records500/01000/01610_hr,records100/01000/01610_lr,9,['NORM'],0
 "{'LVH': 100.0, 'RAO/RAE': 100.0, 'STD_': 0.0, 'STACH': 0.0}",records500/01000/01611_hr,records100/01000/01611_lr,9,['HYP'],0
-"{'NDT': 100.0, 'IRBBB': 100.0, 'NT_': 0.0, 'SR': 0.0}",records500/01000/01612_hr,records100/01000/01612_lr,9,"['CD', 'STTC']",1
+"{'NDT': 100.0, 'IRBBB': 100.0, 'NT_': 0.0, 'SR': 0.0}",records500/01000/01612_hr,records100/01000/01612_lr,9,"['STTC', 'CD']",1
 "{'NORM': 100.0, 'SR': 0.0}",records500/01000/01619_hr,records100/01000/01619_lr,9,['NORM'],0
-"{'ILMI': 100.0, 'NDT': 100.0, 'LOWT': 0.0, 'AFIB': 0.0}",records500/01000/01627_hr,records100/01000/01627_lr,9,"['MI', 'STTC']",1
+"{'ILMI': 100.0, 'NDT': 100.0, 'LOWT': 0.0, 'AFIB': 0.0}",records500/01000/01627_hr,records100/01000/01627_lr,9,"['STTC', 'MI']",1
 "{'NORM': 80.0, 'STACH': 0.0}",records500/01000/01628_hr,records100/01000/01628_lr,9,['NORM'],0
 "{'NORM': 80.0, 'LPR': 0.0, 'SR': 0.0}",records500/01000/01645_hr,records100/01000/01645_lr,9,['NORM'],0
 "{'NORM': 100.0, 'SR': 0.0}",records500/01000/01648_hr,records100/01000/01648_lr,9,['NORM'],0
@@ -206,4 +206,4 @@ scp_codes,filename_hr,filename_lr,strat_fold,labels,label
 "{'NORM': 80.0, 'LPR': 0.0, 'SR': 0.0}",records500/01000/01794_hr,records100/01000/01794_lr,9,['NORM'],0
 "{'LVH': 50.0, 'ISC_': 100.0, 'DIG': 100.0, 'VCLVH': 0.0, 'LOWT': 0.0, 'STD_': 0.0, 'AFIB': 0.0}",records500/01000/01798_hr,records100/01000/01798_lr,9,"['STTC', 'HYP']",1
 "{'IMI': 100.0, 'ALMI': 100.0, 'IRBBB': 100.0, 'QWAVE': 0.0, 'SR': 0.0}",records500/01000/01809_hr,records100/01000/01809_lr,9,"['CD', 'MI']",1
-"{'LAFB': 100.0, 'ISCAL': 100.0, 'AFIB': 0.0}",records500/01000/01817_hr,records100/01000/01817_lr,9,"['CD', 'STTC']",1
+"{'LAFB': 100.0, 'ISCAL': 100.0, 'AFIB': 0.0}",records500/01000/01817_hr,records100/01000/01817_lr,9,"['STTC', 'CD']",1
